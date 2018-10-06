@@ -12,6 +12,11 @@
                     document.querySelector("footer").onclick = () => {
                         window.location = "/channels"
                     }
+                    document.querySelector('#send').disabled = true;
+
+                    document.querySelector('#new_m').onkeyup = () => {
+                        document.querySelector('#send').disabled = document.querySelector('#new_m').value.length <= 0;
+                    };
                     document.querySelector('#new').onsubmit = () => {
                         let text = document.querySelector("#new_m").value;
                         let author = localStorage.getItem('display_name');
