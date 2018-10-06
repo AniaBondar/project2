@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
+                socket.on('connect', () => {
+                    localStorage.setItem('channel', "{{ name }}");
+                    document.querySelector("footer").onclick = () => {
+                        window.location = "/channels"
+                    }
+                    document.querySelector('#new').onsubmit = () => {
+                        let text = document.querySelector("#new_m").value;
+                        let author = localStorage.getItem('display_name');
+                        let channel = "{{ name }}";
+                        socket.emit('add_massage', {'text': text, "author": author, "channel": channel});
+                        return false;
+                    }
+
+                    socket.on('new_massage', data => {
+                        if (document.querySelector("#no"))
+                            document.querySelector("#no").style.display = "none"
+                        if (data.new_m.channel_name === "{{ name }}") {
+                            if (data.b === 1) {
+                                 document.querySelector(".mas").remove()
+                            }
+                            const li = document.createElement('li');
+                            li.innerHTML = "<li class='mas'><b style='display:inline-block'>" + data.new_m.author + "</b>: " + data.new_m.text + " (" + data.new_m.time + ")</li>"
+                            document.querySelector("#m_list").append(li);
+                            document.querySelector("#new_m").value = "";
+                            return false
+                        };
+                    });
+                });
+            });
+        </script>
+        <title>Display name</title>
+    </head>
+    <body style="margin:30px">
+        <div id="massages" class="container-fluid">
+            <h2>{{ name }}</h2>
+            <ul id="m_list" >
+                {% for massage in massages %}
+                    <li class='mas'><b style='display:inline-block'>{{ massage.author }}</b>: {{ massage.text }} ({{ massage.time }})</li>
+                {% else %}
+                    <span id="no">No massages yet!</span>
+                {% endfor %}
+            </ul>
+        </div>
+        <div>
+            <form  id="new">
+                <input id="new_m" autocomplete="off" autofocus placeholder="Type your massage here..." type="text">
+                <button type="submit" id="send">Send</button>
+            </form>
+        </div>
+        <footer style="margin-top:30px"><h5>Back</h5></footer>
+    </body>
+</html>

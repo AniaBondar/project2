@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
+                socket.on('connect', () => {
+                    localStorage.setItem('channel', "");
+                    document.querySelector("#dname").innerHTML = localStorage.getItem('display_name');
+
+                    document.querySelector('#new').onclick = () => {
+                        window.location = "/new_channel";
+                    };
+
+                    document.querySelectorAll('.channels').forEach(channel => {
+                        channel.onclick = () => {
+                            window.location = "/channel/" + channel.innerHTML;
+                        };
+                    });
+
+                    socket.on('channels_new', data => {
+                        const li = document.createElement('li');
+                        li.innerHTML = data[data.length].name;
+                        document.querySelector("#channels").append(li);
+                    });
+
+                    document.querySelector('#change').onclick = () => {
+                        localStorage.setItem('display_name', "");
+                        window.location = "/";
+                    };
+                });
+            });
+
+        </script>
+        <title>Title</title>
+    </head>
+    <body style="margin:30px">
+    <div class="row">
+        <div class="col-sm-6">
+            <h3 id="choose">Choose a channel or create a new one</h3>
+            <h3>Current channels</h3>
+            <ul id="channels">
+                {% for channel in channels %}
+                    <li class="channels" id={{ channel.name }}>{{ channel.name }}</li>
+                {% endfor %}
+                <li id="new">NEW CHANNEL</li>
+            </ul>
+        </div>
+        <div class="col-sm-6" >
+            <h3 style="display: inline-block">Display name:<span style="display: inline-block" id="dname"></span></h3>
+            <h3 id="change">Change the display name</h3>
+        </div>
+    </div>
+    </body>
+</html>
