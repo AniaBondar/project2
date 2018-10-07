@@ -42,7 +42,7 @@ def channel_review(channel_name):
 def add_massage(data):
     text = data["text"];
     author = data["author"]
-    time = strftime("%H:%M:%S", gmtime())
+    time = "time"
     channel_name = data["channel"]
     new_m = {"author": author, "text": text, "time": time, "channel_name": channel_name}
     b = 0
