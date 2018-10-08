@@ -21,11 +21,6 @@
 
                         document.querySelector('#form').onsubmit = () => {
                             let name = document.querySelector('#name').value;
-                            /*console.log("
-                            {{ channels_list }}");
-                            let channels_list = JSON.parse("
-                            {{ channels_list }}");
-                            console.log(channels_list.channels[0]);*/
                             let r = 0;
                             document.querySelectorAll("li").forEach(li => {
                                 if (li.innerHTML == name) {
