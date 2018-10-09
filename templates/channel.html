@@ -2,6 +2,8 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <title>{{ name }}</title>
+        <link rel="icon" href="https://image.flaticon.com/icons/svg/1077/1077909.svg">
         <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
         <script>
@@ -11,7 +13,7 @@
                     localStorage.setItem('channel', "{{ name }}");
                     document.querySelector("footer").onclick = () => {
                         window.location = "/channels"
-                    }
+                    };
                     document.querySelector('#send').disabled = true;
 
                     document.querySelector('#new_m').onkeyup = () => {
@@ -25,26 +27,25 @@
                         let time = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
                         socket.emit('add_massage', {'text': text, "author": author, "channel": channel, "time": time});
                         return false;
-                    }
+                    };
 
                     socket.on('new_massage', data => {
                         if (document.querySelector("#no"))
-                            document.querySelector("#no").style.display = "none"
+                            document.querySelector("#no").style.display = "none";
                         if (data.new_m.channel_name === "{{ name }}") {
                             if (data.b === 1) {
                                  document.querySelector(".mas").remove()
                             }
                             const li = document.createElement('li');
-                            li.innerHTML = "<li class='mas'><b style='display:inline-block'>" + data.new_m.author + "</b>: " + data.new_m.text + " (" + data.new_m.time + ")</li>"
+                            li.innerHTML = "<li class='mas'><b style='display:inline-block'>" + data.new_m.author + "</b>: " + data.new_m.text + " (" + data.new_m.time + ")</li>";
                             document.querySelector("#m_list").append(li);
                             document.querySelector("#new_m").value = "";
                             return false
-                        };
+                        }
                     });
                 });
             });
         </script>
-        <title>{{ name }}</title>
     </head>
     <body style="margin:30px">
         <div id="massages" class="container-fluid">

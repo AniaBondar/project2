@@ -2,6 +2,8 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <title>Display name</title>
+        <link rel="icon" href="https://image.flaticon.com/icons/svg/1077/1077909.svg">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
         <script>
             if (localStorage.getItem('display_name')) {
@@ -26,13 +28,11 @@
                 document.querySelector('#form').onsubmit = () => {
                     let name = document.querySelector('#name').value;
                     localStorage.setItem('display_name', name);
-                    console.log(localStorage.getItem('display_name'))
                     window.location = "/channels";
                     return false
                 };
             });
         </script>
-        <title>Display name</title>
     </head>
     <body style="margin:30px">
         <h1>Choose a display name</h1>
