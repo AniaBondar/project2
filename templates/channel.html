@@ -21,7 +21,9 @@
                         let text = document.querySelector("#new_m").value;
                         let author = localStorage.getItem('display_name');
                         let channel = "{{ name }}";
-                        socket.emit('add_massage', {'text': text, "author": author, "channel": channel});
+                        let now = new Date();
+                        let time = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
+                        socket.emit('add_massage', {'text': text, "author": author, "channel": channel, "time": time});
                         return false;
                     }
 
@@ -42,7 +44,7 @@
                 });
             });
         </script>
-        <title>Display name</title>
+        <title>{{ name }}</title>
     </head>
     <body style="margin:30px">
         <div id="massages" class="container-fluid">

@@ -21,11 +21,12 @@
                         };
                     });
 
-                    socket.on('channels_new', data => {
+                    /*socket.on('channels_new', data => {
                         const li = document.createElement('li');
-                        li.innerHTML = data[data.length].name;
+                        li.innerHTML = data[(data.length-1)].name;
+                        console.log(data[(data.length-1)].name)
                         document.querySelector("#channels").append(li);
-                    });
+                    });*/
 
                     document.querySelector('#change').onclick = () => {
                         localStorage.setItem('display_name', "");
@@ -35,7 +36,7 @@
             });
 
         </script>
-        <title>Title</title>
+        <title>Flack</title>
     </head>
     <body style="margin:30px">
     <div class="row">

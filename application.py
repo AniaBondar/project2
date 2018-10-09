@@ -2,7 +2,6 @@ import os
 
 from flask import Flask, render_template, jsonify, request
 from flask_socketio import SocketIO, emit
-from time import gmtime, strftime
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
@@ -42,7 +41,7 @@ def channel_review(channel_name):
 def add_massage(data):
     text = data["text"];
     author = data["author"]
-    time = "time"
+    time = data["time"]
     channel_name = data["channel"]
     new_m = {"author": author, "text": text, "time": time, "channel_name": channel_name}
     b = 0
