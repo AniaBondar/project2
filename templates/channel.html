@@ -29,24 +29,23 @@
                         let now = new Date();
                         let time = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
                         socket.emit('add_massage', {'text': text, "author": author, "channel": channel, "time": time});
-                        setInterval(function(){return false;}, 500);
+                        return false;
                     };
-                    });
 
-                socket.on('new_massage', data => {
-                    if (document.querySelector("#no"))
-                        document.querySelector("#no").style.display = "none";
-                    if (data.new_m.channel_name === "{{ name }}") {
-                        if (data.b === 1) {
-                             document.querySelector(".mas").remove()
+                    socket.on('new_massage', data => {
+                        if (document.querySelector("#no"))
+                            document.querySelector("#no").style.display = "none";
+                        if (data.new_m.channel_name === "{{ name }}") {
+                            if (data.b === 1) {
+                                 document.querySelector(".mas").remove()
+                            }
+                            const li = document.createElement('li');
+                            li.innerHTML = "<li class='mas'><b style='display:inline-block'>" + data.new_m.author + "</b>: " + data.new_m.text + " (" + data.new_m.time + ")</li>";
+                            document.querySelector("#m_list").append(li);
+                            document.querySelector("#new_m").value = "";
+                            return false
                         }
-                        const li = document.createElement('li');
-                        li.innerHTML = "<li class='mas'><b style='display:inline-block'>" + data.new_m.author + "</b>: " + data.new_m.text + " (" + data.new_m.time + ")</li>";
-                        document.querySelector("#m_list").append(li);
-                        document.querySelector("#new_m").value = "";
-                        return false
-                    }
-
+                    });
                 });
             });
         </script>
