@@ -26,20 +26,22 @@
                         };
                     });
 
-                    socket.on('channels_new', data => {
-                        document.querySelector('#new').remove();
-                        const li = document.createElement('li');
-                        li.innerHTML = data[(data.length-1)].name;
-                        document.querySelector("#channels").append(li);
-                        const nli = document.createElement('li');
-                        nli.innerHTML = "<li id='new'>NEW CHANNEL</li>";
-                        document.querySelector("#channels").append(nli);
-                    });
+
 
                     document.querySelector('#change').onclick = () => {
                         localStorage.setItem('display_name', "");
                         window.location = "/";
                     };
+
+                });
+                socket.on('channels_new', data => {
+                    document.querySelector('#new').remove();
+                    const li = document.createElement('li');
+                    li.innerHTML = data[(data.length-1)].name;
+                    document.querySelector("#channels").append(li);
+                    const nli = document.createElement('li');
+                    nli.innerHTML = "<li id='new'>NEW CHANNEL</li>";
+                    document.querySelector("#channels").append(nli);
                 });
             });
         </script>
