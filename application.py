@@ -39,7 +39,7 @@ def channel_review(channel_name):
 
 @socketio.on("add_massage")
 def add_massage(data):
-    text = data["text"];
+    text = data["text"]
     author = data["author"]
     time = data["time"]
     channel_name = data["channel"]
