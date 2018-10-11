@@ -11,7 +11,7 @@
                 window.location = "/";
             }
             document.addEventListener('DOMContentLoaded', () => {
-                var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
+                var socket = io(location.protocol + '//' + document.domain + ':' + location.port);
                 socket.on('connect', () => {
                     localStorage.setItem('channel', "{{ name }}");
                     document.querySelector("footer").onclick = () => {
