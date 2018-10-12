@@ -1,1 +1,1 @@
-web: gunicorn --worker-class server:application
+web: gunicorn --worker-class application:app
