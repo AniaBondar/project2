@@ -28,6 +28,7 @@ def channel_append(data):
     new_c = {"name": name, "massages": []}
     channels_list.append(new_c)
     emit("channels_new", channels_list, broadcast=True)
+    return render_template("channels.html", channels=channels_list)
 
 @app.route("/channel/<string:channel_name>")
 def channel_review(channel_name):
