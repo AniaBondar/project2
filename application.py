@@ -26,7 +26,7 @@ def new_channel():
 def channel_append(data):
     name = data["name"]
     new_c = {"name": name, "massages": []}
-    channels_list.append(new_c);
+    channels_list.append(new_c)
     emit("channels_new", channels_list, broadcast=True)
 
 @app.route("/channel/<string:channel_name>")

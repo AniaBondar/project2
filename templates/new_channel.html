@@ -34,7 +34,7 @@
                             return false;
                         }
                         socket.emit("channel_append", {'name': name});
-                        setInterval(function(){window.location = "/channels";}, 500);
+                        window.location = "/channels";
                         return false;
                     };
 
