@@ -27,7 +27,7 @@ def channel_append(data):
     name = data["name"]
     new_c = {"name": name, "massages": []}
     channels_list.append(new_c);
-    socketio.emit("channels_new", channels_list, broadcast=True)
+    emit("channels_new", channels_list, broadcast=True)
 
 @app.route("/channel/<string:channel_name>")
 def channel_review(channel_name):
@@ -54,4 +54,4 @@ def add_massage(data):
                 b = 1;
             channel["massages"].append(new_m)
     data = {"new_m": new_m, "b": b}
-    socketio.emit("new_massage", data, broadcast=True)
+    emit("new_massage", data, broadcast=True)
