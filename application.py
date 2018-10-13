@@ -28,7 +28,6 @@ def channel_append(data):
     new_c = {"name": name, "massages": []}
     channels_list.append(new_c)
     emit("channels_new", channels_list, broadcast=True)
-    return render_template("channels.html", channels=channels_list)
 
 @app.route("/channel/<string:channel_name>")
 def channel_review(channel_name):
@@ -52,7 +51,7 @@ def add_massage(data):
                 for i in range(0, 99):
                     channel["massages"][i] = channel["massages"][i+1]
                 del channel["massages"][99]
-                b = 1;
+                b = 1
             channel["massages"].append(new_m)
     data = {"new_m": new_m, "b": b}
     emit("new_massage", data, broadcast=True)
