@@ -31,6 +31,7 @@
                         socket.emit('add_massage', {'text': text, "author": author, "channel": channel, "time": time});
                         return false;
                     };
+                    });
 
                     socket.on('new_massage', data => {
                         if (document.querySelector("#no"))
@@ -45,7 +46,7 @@
                             document.querySelector("#new_m").value = "";
                             return false
                         }
-                    });
+
                 });
             });
         </script>
