@@ -29,6 +29,7 @@
                         let now = new Date();
                         let time = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
                         socket.emit('add_massage', {'text': text, "author": author, "channel": channel, "time": time});
+                        console.log(text, " ", author, " ", channel, " ", time);
                         return false;
                     };
                     });
