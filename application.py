@@ -7,7 +7,10 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 socketio = SocketIO(app)
 
-channels_list = [{"name": "channel1", "massages": [{"author": "ania", "text": "hello", "time": "21:00:00"}]}]
+channels_list = [{"name": "channel1",
+                  "massages": [{"author": "ania",
+                                "text": "hello",
+                                "time": "21:00:00"}]}]
 
 
 @app.route("/")

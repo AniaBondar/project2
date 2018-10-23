@@ -29,6 +29,7 @@
                         let now = new Date();
                         let time = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
                         socket.emit('add_massage', {'text': text, "author": author, "channel": channel, "time": time});
+                        document.querySelector("#new_m").value = "";
                         console.log(text, " ", author, " ", channel, " ", time);
                         return false;
                     };
@@ -44,7 +45,6 @@
                             const li = document.createElement('li');
                             li.innerHTML = "<li class='mas'><b style='display:inline-block'>" + data.new_m.author + "</b>: " + data.new_m.text + " (" + data.new_m.time + ")</li>";
                             document.querySelector("#m_list").append(li);
-                            document.querySelector("#new_m").value = "";
                             return false
                         }
 
